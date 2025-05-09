@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share AI - 智能定制与教育解决方案</title>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Framer Motion CDN -->
+    <script src="https://unpkg.com/framer-motion@10.12.4/dist/framer-motion.js"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a237e',     // 深蓝色主色调
+                        secondary: '#7c4dff',   // 紫色强调色
+                        accent: '#00e5ff',      // 亮青色强调色
+                        dark: '#121212',        // 深色背景
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a1a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #7c4dff, #00e5ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a237e, #7c4dff);
+        }
+        
+        .card {
+            backdrop-filter: blur(16px);
+            background-color: rgba(26, 35, 126, 0.15);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 77, 255, 0.3);
+            border: 1px solid rgba(124, 77, 255, 0.5);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 bg-opacity-80 bg-dark backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold gradient-text">Share AI</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-accent transition">首页</a>
+                <a href="#about" class="text-gray-300 hover:text-accent transition">关于我们</a>
+                <a href="#products" class="text-gray-300 hover:text-accent transition">产品服务</a>
+                <a href="#contact" class="text-gray-300 hover:text-accent transition">联系我们</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/30 to-dark"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,rgba(124,77,255,0.2),transparent_40%)]">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 z-10 text-center">
+            <div class="animate-on-scroll visible">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="gradient-text">Share AI</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                    定制化AI代理构建与教育系统集成专家
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#products" class="px-8 py-3 rounded-full bg-secondary hover:bg-secondary/80 text-white font-medium transition">
+                        探索产品
+                    </a>
+                    <a href="#contact" class="px-8 py-3 rounded-full bg-transparent border border-accent hover:bg-accent/10 text-accent font-medium transition">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-accent">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">关于 <span class="gradient-text">Share AI</span></h2>
+                <div class="w-20 h-1 bg-accent mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-3xl mx-auto">Share AI 是一家专注于人工智能技术的创新公司，致力于为企业和教育领域提供尖端的AI解决方案。我们的使命是通过定制化AI代理和教育系统集成，让AI技术更加普及和易于使用。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card rounded-xl p-6 animate-on-scroll">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">先进技术</h3>
+                    <p class="text-gray-400">采用最前沿的自然语言处理和机器学习技术，确保AI代理的高性能和准确性。</p>
+                </div>
+
+                <div class="card rounded-xl p-6 animate-on-scroll">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">定制化服务</h3>
+                    <p class="text-gray-400">根据客户的具体需求和场景，提供完全定制化的AI解决方案。</p>
+                </div>
+
+                <div class="card rounded-xl p-6 animate-on-scroll">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">教育赋能</h3>
+                    <p class="text-gray-400">专注于通过AI技术提升教育体验，帮助学生更高效地学习和解决问题。</p>
+                </div>
+
+                <div class="card rounded-xl p-6 animate-on-scroll">
+                    <div class="text-accent text-3xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">安全可靠</h3>
+                    <p class="text-gray-400">注重数据安全和隐私保护，提供安全可靠的AI服务体验。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品服务 -->
+    <section id="products" class="py-20 bg-dark relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">我们的 <span class="gradient-text">产品</span></h2>
+                <div class="w-20 h-1 bg-accent mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-3xl mx-auto">Share AI 提供两款核心产品，满足企业定制化AI需求和教育领域的智能解决方案。</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- 产品1：定制化AI代理 -->
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-7 row-span-2 animate-on-scroll">
+                    <div class="h-full flex flex-col">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">定制化AI代理构建服务</h3>
+                            <p class="text-gray-300 mb-6">为企业和个人提供完全定制化的AI代理开发服务，根据特定需求量身定制功能和行为。</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">完全定制化</h4>
+                                    <p class="text-sm text-gray-400">根据客户独特需求量身定制AI代理</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">灵活集成</h4>
+                                    <p class="text-sm text-gray-400">与客户现有系统无缝集成</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">专业开发</h4>
+                                    <p class="text-sm text-gray-400">由AI专家团队开发和支持</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">持续优化</h4>
+                                    <p class="text-sm text-gray-400">基于使用数据不断改进AI代理性能</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto p-8 pt-0">
+                            <h4 class="font-semibold text-accent mb-3">应用场景</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">客户服务自动化</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">数据分析和决策支持</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">流程自动化和优化</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">个性化用户体验</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 产品图片 -->
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-5 row-span-2 animate-on-scroll">
+                    <img src="imgs/ai_image_1.png" alt="AI代理技术" class="w-full h-full object-cover">
+                </div>
+
+                <!-- 产品2：教育系统 -->
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-5 row-span-2 animate-on-scroll">
+                    <img src="imgs/education_tech.png" alt="教育AI系统" class="w-full h-full object-cover">
+                </div>
+
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-7 row-span-2 animate-on-scroll">
+                    <div class="h-full flex flex-col">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">教育系统WhatsApp集成</h3>
+                            <p class="text-gray-300 mb-6">面向小学和中学生的AI教育系统，通过WhatsApp平台提供数学和科学问题的解答服务。</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">即时解答</h4>
+                                    <p class="text-sm text-gray-400">学生可随时通过WhatsApp提问获得即时回复</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">专注数学和科学</h4>
+                                    <p class="text-sm text-gray-400">针对小学和中学课程提供专业解答</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">个性化学习</h4>
+                                    <p class="text-sm text-gray-400">根据学生的学习进度调整解答方式</p>
+                                </div>
+                                <div class="bg-primary/20 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-accent mb-2">易于使用</h4>
+                                    <p class="text-sm text-gray-400">无需安装额外应用，直接通过WhatsApp使用</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto p-8 pt-0">
+                            <h4 class="font-semibold text-accent mb-3">主要优势</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">提高学习效率和兴趣</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">随时随地获取学习支持</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">减轻教师和家长的负担</span>
+                                <span class="px-3 py-1 bg-secondary/20 rounded-full text-sm">促进自主学习能力</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技术特点 -->
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-6 animate-on-scroll">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 gradient-text">技术特点</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>先进的自然语言处理技术</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>深度学习和机器学习算法</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>安全可靠的数据处理</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                                <span>持续学习和自我优化能力</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 为什么选择我们 -->
+                <div class="card rounded-xl overflow-hidden col-span-12 md:col-span-6 animate-on-scroll">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4 gradient-text">为什么选择我们</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-accent mt-1 mr-3"></i>
+                                <span>专业的AI研发团队</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-accent mt-1 mr-3"></i>
+                                <span>定制化解决方案</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-accent mt-1 mr-3"></i>
+                                <span>持续的技术支持和优化</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-accent mt-1 mr-3"></i>
+                                <span>注重用户体验和实际效果</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">联系 <span class="gradient-text">我们</span></h2>
+                <div class="w-20 h-1 bg-accent mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-3xl mx-auto">无论您是想了解更多关于我们的产品，还是有定制化需求，都欢迎与我们联系。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="card rounded-xl p-8 animate-on-scroll">
+                    <h3 class="text-xl font-bold mb-6 gradient-text">联系方式</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">电子邮件</h4>
+                                <p class="text-gray-400">aeducation258@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">电话</h4>
+                                <p class="text-gray-400">010-2856227</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent text-xl mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">地址</h4>
+                                <p class="text-gray-400">28, Jln Perdana 3/10, Pandan Perdana, 55300 Kuala Lumpur, Selangor</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold mb-4">关注我们</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-white transition">
+                                <i class="fab fa-weixin text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-accent hover:text-white transition">
+                                <i class="fab fa-weibo text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-accent hover:text-white transition">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                            <a href="#" class="text-accent hover:text-white transition">
+                                <i class="fab fa-github text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl p-8 animate-on-scroll">
+                    <h3 class="text-xl font-bold mb-6 gradient-text">发送消息</h3>
+                    
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium mb-2">姓名</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded-lg bg-primary/20 border border-gray-700 focus:border-accent focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium mb-2">电子邮件</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 rounded-lg bg-primary/20 border border-gray-700 focus:border-accent focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="subject" class="block text-sm font-medium mb-2">主题</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 rounded-lg bg-primary/20 border border-gray-700 focus:border-accent focus:outline-none">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium mb-2">消息</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-lg bg-primary/20 border border-gray-700 focus:border-accent focus:outline-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 rounded-lg bg-secondary hover:bg-secondary/80 text-white font-medium transition">
+                            发送消息
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">Share AI</span>
+                    <p class="text-gray-400 mt-2">定制化AI代理构建与教育系统集成专家</p>
+                </div>
+                
+                <div class="text-gray-400 text-sm">
+                    &copy; 2023 Share AI. 保留所有权利。
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
